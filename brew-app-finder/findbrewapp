@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+const util = require('util')
+const jq = require('node-jq')
+const execSync = require('child_process').execSync
+
+const jqOptions = { input: 'json' }
+const appName = getAppName(process.argv)
+
+function findAppVersion(appName) {
+  const brewInfoAsString = execSync('brew info --json=v1 --installed')
+  const brewInfoAsJson = JSON.parse(brewInfoAsString)
+  const jqFilter = `map(select(.name == "${appName}")) | .[].installed | .[].version`
+
+  jq.run(jqFilter, brewInfoAsJson, jqOptions)
+    .then((filteredJson) => {
+      const appVersion = filteredJson.replace(/"/g, '')
+
+      if (!appVersion) {
+        console.error(`Couldn't find app: ${appName}`)
+        process.exit(1)
+      }
+      printAppPath(appName, appVersion)
+    })
+    .catch((err) => {
+      console.error(err)
+      process.exit(1)
+    })
+}
+
+function getAppName(args) {
+  if (args.length < 3) {
+    console.error("Usage: findbrewapp appName")
+    process.exit(-1)
+  }
+
+  return args[2].toLowerCase()
+}
+
+function printAppPath(appName, appVersion) {
+  const brewBasePrefix = `${execSync('brew --prefix')}`
+  const brewAppPathPrefix = `${brewBasePrefix.replace(/\n/g, '')}/Cellar/`
+  const brewExecLocationPostfix = "/libexec"
+
+  const fullyQualifiedPath = `${brewAppPathPrefix}${appName}/${appVersion}${brewExecLocationPostfix}`
+  console.log(fullyQualifiedPath)
+}
+
+findAppVersion(appName)

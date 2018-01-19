@@ -1,0 +1,14 @@
+{
+  "name": "com.allanditzel.brewappfinder",
+  "version": "1.0.0",
+  "description": "CLI tool to be used in SHELL scripts to look up the location of the latest installed version of an application by the Homebrew package manager.",
+  "main": "findbrewapp",
+  "scripts": {
+    "test": "findbrewapp"
+  },
+  "author": "Allan Ditzel",
+  "license": "ISC",
+  "dependencies": {
+    "node-jq": "^1.2.0"
+  }
+}

@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const fs = require('fs-extra');
+
+const mavenSettingsFile = "/Users/aditzel/.m2/settings.xml"
+const mavenSettingsFileBase = `${mavenSettingsFile}.`
+
+const Networks = {
+    "corp": "corpnet",
+    "civ": "civnet"
+}
+
+const mode = getModeFromArgs(process.argv)
+
+fs.copy(`${mavenSettingsFileBase}${mode}net`, mavenSettingsFile, { dereference: true })
+    .then(() => console.log(`Successfully set environment to mode '${mode}'`))
+    .catch(err => console.error(err))
+
+function getModeFromArgs(args) {
+    if (args.length < 3) {
+        console.error(`You must pass in a mode. Valid values are: ${Object.keys(Networks)}`)
+        process.exit(1)
+    }
+
+    let mode = args[2]
+
+    if (!Networks.hasOwnProperty(mode)) {
+        console.error(`Mode '${mode}' is not valid. Please use one of the following values: ${Object.keys(Networks)}`)
+        process.exit(1)
+    }
+    return mode
+}
