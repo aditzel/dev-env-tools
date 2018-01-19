@@ -59,6 +59,16 @@ export MAVEN_HOME=$(/foo/bar/dev-env-tools/brew-app-finder/findbrewapp maven)
 export PATH=$MAVEN_HOME/bin:$PATH
 ```
 
+### Alternatives
+
+Should you find yourself not wanting to find where a brew managed app is installed you can do the following via shell script:
+
+```bash
+export HOMEBREW_INSTALL_BASE="$(brew --prefix)/Cellar/" 
+export MAVEN_VERSION="$(brew info --json=v1 --installed | jq 'map(select(.name == "maven")) | .[0] | .installed | .[0] | .version' | xargs echo)" 
+export MAVEN_HOME=$HOMEBREW_INSTALL_BASE"maven/"$MAVEN_VERSION"/libexec"
+```
+
 ## Authors
 
 * **Allan Ditzel** - *Initial work* - [aditzel](https://github.com/aditzel)
