@@ -11,10 +11,11 @@ You might ask, "Why use Node.js for this?" The short answer is that this was a g
 ### Installing
 
 1. Clone this project to a location of your choosing.
-2. Create and export an environment variable for the location of the the switcher. E.g. `export ENV_SWITCHER_HOME=/foo/bar/dev-env-tools/env-switcher`
-3. Add to the PATH. E.g. `export PATH=$ENV_SWITCHER_HOME:$PATH`
-4. Create a file named `settings.xml.civnet` which contains the maven settings file for when you're not on your corporate network/vpn. 
-5. Create a file named `settings.xml.corpnet` which contains the maven settings file for when you're on your corporate network/vpn. 
+2. Run `npm install` in the location where you installed the switcher. E.g. `/foo/bar/dev-env-tools/env-switcher`
+3. Create and export an environment variable for the location of the the switcher. E.g. `export ENV_SWITCHER_HOME=/foo/bar/dev-env-tools/env-switcher`
+4. Add to the PATH. E.g. `export PATH=$ENV_SWITCHER_HOME:$PATH`
+5. Create a file named `settings.xml.civnet` which contains the maven settings file for when you're not on your corporate network/vpn. 
+6. Create a file named `settings.xml.corpnet` which contains the maven settings file for when you're on your corporate network/vpn. 
 
 ### Running
 
@@ -39,6 +40,7 @@ You might ask, "Why use Node.js for this?" The short answer is that this was a g
 ### Installing
 
 1. Clone this project to a location of your choosing.
+2. Run `npm install` in the location where you installed the finder. E.g. `/foo/bar/dev-env-tools/brew-app-finder`
 
 ### Running 
 
