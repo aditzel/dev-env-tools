@@ -4,11 +4,15 @@
   "description": "CLI tool to be used in SHELL scripts to look up the location of the latest installed version of an application by the Homebrew package manager.",
   "main": "findbrewapp",
   "scripts": {
-    "test": "findbrewapp"
+    "test": "findbrewapp",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Allan Ditzel",
   "license": "ISC",
   "dependencies": {
-    "node-jq": "^1.2.0"
-  }
+    "node-jq": "^1.2.0",
+    "snyk": "^1.104.2"
+  },
+  "snyk": true
 }
